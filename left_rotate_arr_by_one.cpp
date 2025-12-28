@@ -4,39 +4,43 @@ using namespace std;
 
 int left_rotate_array_by_one(vector<int> &arr);
 void print(const vector<int> &arr);
-void swapin(vector<int>& arr,int i,int* number){
-    int temp=arr[i];
-    arr[i]=*number;
-    *number=temp;
-}
+void rotate(vector<int>& nums, int k);
+
 int main()
 {
     vector<int> array = {15, 1, 45, 61, 210, 41, 51, 70, 11, 121, 17};
     print(array);
-    left_rotate_array_by_one(array);
+    rotate(array,2);
+    // left_rotate_array_by_one(array);
     print(array);
     return 0;
 }
 
-int left_rotate_array_by_one(vector<int>& nums) {
-    int* ptr;
-    int temp1=INT16_MAX;
-    ptr=&temp1;
-    for(int i=nums.size()-1;i>=0;i--)
-    {
-        if(temp1==INT16_MAX)
+void rotate(vector<int>& nums, int k) {
+        vector<int> temp;
+        for(int j = ((nums.size())-k); j<=(nums.size()-1) ; j++)
         {
-            temp1=nums[i-1];
-            nums[i-1]=nums[i];
+            temp.push_back(nums[j]);
         }
-        else
+        for (int i = (nums.size()-1); i>=k ; i--)
         {
-            swapin(nums,i,ptr);
+            nums[i]=nums[i-k];
         }
-    }
-    swapin(nums,(nums.size()-1),ptr);
+        for (int z = 0; z<k ; z++)
+        {
+            nums[z]=temp[z];
+        }
 
 }
+// int left_rotate_array_by_one(vector<int>& nums) {
+//     int first=nums.front();
+//     for (int i = 0; i < (nums.size()-1); i++)
+//     {
+//         nums[i]=nums[i+1];
+//     }
+//     nums.pop_back();
+//     nums.back()=first;
+// }
 
 void print(const vector<int> &arr)
 {
